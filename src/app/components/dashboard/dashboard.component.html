@@ -1,0 +1,47 @@
+<div *ngIf="mostrarError" class="text-center">
+  <div class="alert alert-dismissible alert-danger">
+    <strong>Error al obtener información</strong> verifique el nombre de la
+    ciudad.
+  </div>
+</div>
+<div class="container pt-4">
+  <div class="row">
+    <div class="col-lg-4">
+      <img [src]="urlImg" alt="img-clima" width="250px" height="250px" />
+    </div>
+    <div class="col-lg-6">
+      <div class="d-grid gap-2">
+        <input
+          class="form-control form-control-lg size"
+          type="text"
+          [(ngModel)]="ciudad"
+          placeholder="Ingrese Ciudad"
+        />
+        <button
+          class="btn btn-lg btn-primary size"
+          type="button"
+          [disabled]="ciudad == ''"
+          (click)="obtenerClima()"
+        >
+          Buscar
+        </button>
+
+        <div
+          *ngIf="loading"
+          class="d-md-flex align-items-center flex-column m-4"
+        >
+          <div class="spinner-border text-primary" role="status"></div>
+          <div class="spinner-border text-primary" role="status"></div>
+          <div class="spinner-border text-primary" role="status"></div>
+        </div>
+        <div *ngIf="query" class="card mt-3">
+          <div class="card-body">
+            <p><b>Temperatura: </b> {{ temperatura | number : "1.2-2" }} °C</p>
+            <p><b>Humedad: </b> {{ humedad }}</p>
+            <p><b>Clima: </b> {{ clima }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
